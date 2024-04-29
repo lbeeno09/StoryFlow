@@ -1,11 +1,20 @@
 workspace "StoryFlow"
 	configurations { "Debug", "Release" }
 	
+filter "action:gmake2"
+	location "build/make"
+
+filter "action:vs*"
+	location "build/VS"
+
+filter "action:xcode4"
+	location "build/Xcode"
+
 project "StoryFlow"
 	kind "ConsoleApp"
 	language "C++"
 	targetdir "bin/%{cfg.buildcfg}"
-	objdir = "bin-intermediate/%{cfg.buildcfg}"
+	objdir "bin-intermediate/%{cfg.buildcfg}"
 
 	configurations { "Debug", "Release" }
 
