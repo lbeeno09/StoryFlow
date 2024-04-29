@@ -15,6 +15,8 @@ enum DisplayState
 	OTHER
 };
 
+// TODO: Define structs for each menu
+
 class Window : public WindowBase
 {
 public:
