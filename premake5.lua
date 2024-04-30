@@ -1,11 +1,23 @@
+function getBuildLocation(action)
+	if action == "gmake2" then
+		return "build/make"
+	elseif action == "vs2022" then
+		return "build/vs2022"
+	elseif action == "xcode4" then
+		return "build/Xcode"
+	else
+		return "build/unknown"
+	end
+end
+
 workspace "StoryFlow"
 	configurations { "Debug", "Release" }
 	
 filter "action:gmake2"
 	location "build/make"
 
-filter "action:vs*"
-	location "build/VS"
+filter "action:vs2022"
+	location "build/vs2022"
 
 filter "action:xcode4"
 	location "build/Xcode"
@@ -13,15 +25,18 @@ filter "action:xcode4"
 project "StoryFlow"
 	kind "ConsoleApp"
 	language "C++"
-	targetdir "bin/%{cfg.buildcfg}"
-	objdir "bin-intermediate/%{cfg.buildcfg}"
+
+    local buildLocation = getBuildLocation(_ACTION)
+
+	targetdir(buildLocation .. "/bin/%{cfg.buildcfg}")
+	objdir(buildLocation .. "/bin-int/%{cfg.buildcfg}")
 
 	configurations { "Debug", "Release" }
 
 	includedirs {
+		"deps/glfw/include",
 		"deps/imgui",
 		"deps/imgui/backends",
-		"deps/glfw/include",
 		"deps/json/include"
 	}
 
@@ -35,8 +50,8 @@ project "StoryFlow"
 	}
 
 	files {
-		"StoryFlow/**.h",
-		"StoryFlow/**.cpp",
+		"src/**.h",
+		"src/**.cpp",
 		"deps/imgui/imgui.cpp",
 		"deps/imgui/imgui_demo.cpp",
 		"deps/imgui/imgui_draw.cpp",
