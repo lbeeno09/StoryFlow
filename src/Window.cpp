@@ -1,5 +1,7 @@
 #include "Window.h"
 
+#include <iostream>
+
 void Window::Init()
 {
     // Our state
@@ -9,6 +11,8 @@ void Window::Init()
 
 void Window::Update()
 {
+    ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
+
     // Show Menu Bar
     ShowMenuBar();
 
@@ -20,6 +24,10 @@ void Window::Update()
 
     // Menu window
     {
+        ImVec2 mainWindowSize = ImGui::GetMainViewport()->Size;
+        ImVec2 menuWindowSize = ImVec2(mainWindowSize.x * 0.3f, -1.0f);
+
+        ImGui::SetNextWindowSizeConstraints(menuWindowSize, menuWindowSize);
         ImGui::Begin("Menu", nullptr, ImGuiDockNodeFlags_AutoHideTabBar);
 
         ImVec2 buttonSize(ImGui::GetWindowWidth(), ImGui::GetWindowHeight() / 6.0f - 7.5f);
@@ -60,7 +68,6 @@ void Window::Update()
             currentState = OTHER;
         }
 
-
         ImGui::End();
     }
 
@@ -92,4 +99,6 @@ void Window::Update()
 
         ImGui::End();
     }
+
+    // TODO: progamatically snap windows
 }

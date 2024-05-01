@@ -4,6 +4,11 @@
 #include "WindowBase.h"
 
 #include "imgui.h"
+#include "imgui_internal.h"
+
+#include "nlohmann/json.hpp"
+
+#include <string>
 
 enum DisplayState
 {
@@ -34,6 +39,9 @@ private:
 	void ShowCharacterDisplay();
 	void ShowWorldDisplay();
 	void ShowMiscDisplay();
+
+    void SaveState(const nlohmann::json& appState, const std::string& filename);
+    nlohmann::json LoadState(const std::string& filename);
 
 	// User states
 	bool showDemoWindow = {};

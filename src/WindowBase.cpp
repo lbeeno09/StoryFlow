@@ -104,8 +104,6 @@ void WindowBase::Run()
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
-
         Update();
 
         // Rendering

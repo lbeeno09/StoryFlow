@@ -1,23 +1,8 @@
-function getBuildLocation(action)
-    local makes = { "gmake", "gmake2" }
-    local vss = { "vs2005", "vs2008", "vs2010", "vs2012", "vs2013", "vs2015", "vs2017", "vs2019", "vs2022" }
-
-	if makes[action] then
-		return "build/make"
-	elseif vss[action] then
-		return "build/VS"
-	elseif action == "xcode4" then
-		return "build/Xcode"
-	else -- codelite
-		return "build/codelite"
-	end
-end
-
 workspace "StoryFlow"
 	configurations { "Debug", "Release" }
 	
-filter "action:gmake*"
-	location "build/make"
+filter "action:gmake2"
+	location "build/Make"
 
 filter "action:vs*"
 	location "build/VS"
@@ -25,18 +10,13 @@ filter "action:vs*"
 filter "action:xcode4"
 	location "build/Xcode"
 
-filter "action:codelite"
-    location "build/codelite"
-
 project "StoryFlow"
 	kind "ConsoleApp"
 	language "C++"
     cppdialect "C++20"
 
-    local buildLocation = getBuildLocation(_ACTION)
-
-	targetdir(buildLocation .. "/bin/%{cfg.buildcfg}")
-	objdir(buildLocation .. "/bin-int/%{cfg.buildcfg}")
+	targetdir("build/bin/%{cfg.buildcfg}")
+	objdir("build/bin-int/%{cfg.buildcfg}")
 
 	configurations { "Debug", "Release" }
 
