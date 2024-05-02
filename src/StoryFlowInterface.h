@@ -3,40 +3,48 @@
 
 #include <nlohmann/json.hpp>
 
-#include <string>
 #include <optional>
-#include <vector>
+#include <string>
 
 using json = nlohmann::json;
 
+enum DisplayState
+{
+	HOME,
+	OVERVIEW,
+	NOVEL,
+	CHARACTER,
+	WORLD,
+	OTHER
+};
+
 struct Overview
 {
-    std::vector<std::string> plots;
-};
+
+}
 
 struct Novel
 {
 
-};
+}
 
-struct Character 
+struct Character
 {
     std::string name;
     std::optional<int> age;
-    std::vector<std::string>> descriptions;
-    json otherProperties;
+    std::string description;
 
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(Character, name, age, descriptions, otherProperties)
-};
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(Character, name, age, description)
+}
 
-struct Novel
+struct World
 {
 
-};
+}
 
 struct Other
 {
 
-};
+}
 
 #endif

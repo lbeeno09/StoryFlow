@@ -1,6 +1,7 @@
 #ifndef _WINDOW_H
 #define _WINDOW_H
 
+#include "StoryflowInterface.h"
 #include "WindowBase.h"
 
 #include "imgui.h"
@@ -9,16 +10,6 @@
 #include "nlohmann/json.hpp"
 
 #include <string>
-
-enum DisplayState
-{
-	HOME,
-	OVERVIEW,
-	NOVEL,
-	CHARACTER,
-	WORLD,
-	OTHER
-};
 
 // TODO: Define structs for each menu
 
@@ -40,14 +31,20 @@ private:
 	void ShowWorldDisplay();
 	void ShowMiscDisplay();
 
+    // Saving/State management
     void SaveState(const nlohmann::json& appState, const std::string& filename);
     nlohmann::json LoadState(const std::string& filename);
+	char overviewBuffer[10000] = "";
+	char novelBuffer[10000] = "";
+	char Buffer[10000] = "";
+	char novelBuffer[10000] = "";
+
+	char novelBuffer[10000] = "";
 
 	// User states
 	bool showDemoWindow = {};
 	DisplayState currentState = {};
 
-	char textBuffer[10000] = "";
 };
 
 #endif

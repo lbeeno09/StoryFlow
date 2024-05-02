@@ -3,5 +3,5 @@
 void Window::ShowNovelDisplay()
 {
     ImGui::Text("Novel Display");
-    ImGui::InputTextMultiline("##Text", textBuffer, sizeof(textBuffer), ImVec2(-1, -1));
+    ImGui::InputTextMultiline("##Text", novelBuffer, sizeof(novelBuffer), ImVec2(-1, -1));
 }
